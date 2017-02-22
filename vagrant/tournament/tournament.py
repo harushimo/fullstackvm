@@ -13,13 +13,18 @@ def connect():
 
 def deleteMatches():
     """Remove all the match records from the database."""
+    db = connect()
+    cursor = db.cursor()
+    cursor.execute("delete from Matches *;")
+    db.commit()
+    db.close()
 
 
 def deletePlayers():
     """Remove all the player records from the database."""
     db = connect()
     cursor = db.cursor()
-    cursor.execute("DELETE FROM players *;")
+    cursor.execute("delete from Players *;")
     db.commit()
     db.close()
 
@@ -27,6 +32,13 @@ def deletePlayers():
 
 def countPlayers():
     """Returns the number of players currently registered."""
+    db = connect()
+    cursor = db.cursor()
+    cursor.execute("select count(*) from Players *;")
+    totalCount = cursor.fetchone()[0];
+    db.close()
+    return totalCount;
+
 
 
 def registerPlayer(name):
@@ -38,6 +50,11 @@ def registerPlayer(name):
     Args:
       name: the player's full name (need not be unique).
     """
+    db = connect()
+    cursor = db.cursor()
+    cursor.execute("insert into Players(name) values(%s)", (name, ));
+    db.commit()
+    db.close()
 
 
 def playerStandings():
@@ -53,6 +70,12 @@ def playerStandings():
         wins: the number of matches the player has won
         matches: the number of matches the player has played
     """
+    db = connect()
+    cursor = db.cursor()
+    cursor.execute("select players_id, name, wins, matches from Players order by wins desc");
+    totalWins = cursor.fetchall()
+    db.close()
+    return totalWins
 
 
 def reportMatch(winner, loser):
@@ -62,6 +85,12 @@ def reportMatch(winner, loser):
       winner:  the id number of the player who won
       loser:  the id number of the player who lost
     """
+    db = connect()
+    cursor = db.cursor()
+    cursor.execute("insert into Matches(winner, loser) values(%s, %s)", (winner, loser));
+    db.commit()
+    db.close()
+
 
 
 def swissPairings():
@@ -79,3 +108,11 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+
+    currentStandings = playerStandings()
+    swissPair = []
+    for player in range(0, len(currentStandings), 2):
+        swissStanding1 = currentStandings[player]
+        swissStanding2 = currentStandings[player + 1]
+        swissPair.append(swissStanding1[0], swissStanding1[1], swissStanding2[0], swissStanding2[1])
+    return swissPair
