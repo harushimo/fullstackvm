@@ -17,15 +17,15 @@ create database tournament;
 -- Creating Tables
 create table Players (
   players_id serial PRIMARY KEY,
-  name text
-  win int default 0
-  matches int default 0
+  name text,
+  win int default 0,
+  matches int default 0,
 );
 
 create table Matches (
-  match_id serial
-  winner serial references Players(players_id)
-  loser serial references Players(players_id)
+  match_id serial,
+  winner serial references Players(players_id),
+  loser serial references Players(players_id),
 );
 
 -- Drop Tables if they exist
