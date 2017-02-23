@@ -72,7 +72,7 @@ def playerStandings():
     """
     db = connect()
     cursor = db.cursor()
-    cursor.execute("select players_id, name, wins, matches from Players order by wins desc");
+    cursor.execute("select players_id, name, win, matches from Players order by win desc");
     totalWins = cursor.fetchall()
     db.close()
     return totalWins
@@ -87,7 +87,7 @@ def reportMatch(winner, loser):
     """
     db = connect()
     cursor = db.cursor()
-    cursor.execute("insert into Matches(winner, loser) values(%s, %s)", (winner, loser));
+    cursor.execute("insert into Matches(winner, loser) values(%s, %s);", (winner, loser))
     db.commit()
     db.close()
 

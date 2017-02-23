@@ -29,5 +29,5 @@ create table Matches (
 );
 
 -- Drop Tables if they exist
-drop table IF EXISTS Players;
-drop table IF EXISTS Matches;
+-- drop table IF EXISTS Players;
+-- drop table IF EXISTS Matches;
