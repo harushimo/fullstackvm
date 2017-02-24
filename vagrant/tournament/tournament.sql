@@ -28,6 +28,8 @@ create table Matches (
   loser serial references Players(players_id)
 );
 
+-- create view playersWin
+
 -- Drop Tables if they exist
 -- drop table IF EXISTS Players;
 -- drop table IF EXISTS Matches;
