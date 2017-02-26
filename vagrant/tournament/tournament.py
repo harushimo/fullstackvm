@@ -111,8 +111,8 @@ def swissPairings():
 
     currentStandings = playerStandings()
     swissPair = []
-    for player in range(0, len(currentStandings), 2):
-        swissStanding1 = currentStandings[player]
-        swissStanding2 = currentStandings[player + 1]
+    for i in range(0, len(currentStandings), 2):
+        swissStanding1 = currentStandings[i]
+        swissStanding2 = currentStandings[i + 1]
         swissPair.append(swissStanding1[0], swissStanding1[1], swissStanding2[0], swissStanding2[1])
     return swissPair

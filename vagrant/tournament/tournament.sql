@@ -28,7 +28,16 @@ create table Matches (
   loser serial references Players(players_id)
 );
 
--- create view playersWin
+create view playerStandings(
+  select *
+  from Players
+  left join Matches
+  where Players.players_id == Matches.winner
+  totalMatchedplayed = count(matches)
+  totalWins = count(win)
+);
+
+
 
 -- Drop Tables if they exist
 -- drop table IF EXISTS Players;
