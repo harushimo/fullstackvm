@@ -72,7 +72,7 @@ def playerStandings():
     """
     db = connect()
     cursor = db.cursor()
-    cursor.execute("select players_id, name, wins, matches from player_Standings order by wins desc");
+    cursor.execute("select * from player_Standings");
     totalWins = cursor.fetchall()
     db.close()
     return totalWins
@@ -114,5 +114,6 @@ def swissPairings():
     for i in range(0, len(currentStandings), 2):
         swissStanding1 = currentStandings[i]
         swissStanding2 = currentStandings[i + 1]
-        swissPair.append(swissStanding1[0], swissStanding1[1], swissStanding2[0], swissStanding2[1])
+        swissMatchups = (swissStanding1[0], swissStanding1[1], swissStanding2[0], swissStanding2[1])
+        swissPair.append(swissMatchups)
     return swissPair

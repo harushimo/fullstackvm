@@ -29,8 +29,8 @@ create table Matches (
 -- Creating views
 create view player_Standings as
   select Players.players_id, Players.name,
-  (select count(Matches.winner) from matches where Players.players_id = Matches.winner) as wins,
-  (select count(Matches.match_id) from matches where Player.players_id = Matches.loser or Players.players_id = Matches.winner) as Matches
+  (select count(Matches.winner) from Matches where Players.players_id = Matches.winner) as wins,
+  (select count(Matches.match_id) from Matches where Players.players_id = Matches.loser or Players.players_id = Matches.winner) as Matches
   from Players
   order by wins desc;
 
