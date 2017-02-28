@@ -22,15 +22,16 @@ create table Players (
 
 create table Matches (
   match_id serial,
-  winner serial references Players(players_id),
-  loser serial references Players(players_id)
+  winner int references Players(players_id) NOT NULL,
+  loser int references Players(players_id) NOT NULL
 );
 
 -- Creating views
 create view player_Standings as
-  select players_id, name,
-  (select count(*) from matches where Players.players_id == Matches.winner) as wins,
-  from Players,
+  select Players.players_id, Players.name,
+  (select count(Matches.winner) from matches where Players.players_id = Matches.winner) as wins,
+  (select count(Matches.match_id) from matches where Player.players_id = Matches.loser or Players.players_id = Matches.winner) as Matches
+  from Players
   order by wins desc;
 
 
