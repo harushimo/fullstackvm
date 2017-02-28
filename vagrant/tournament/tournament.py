@@ -72,7 +72,7 @@ def playerStandings():
     """
     db = connect()
     cursor = db.cursor()
-    cursor.execute("select players_id, name, win, matches from Players order by win desc");
+    cursor.execute("select players_id, name, wins, matches from player_Standings order by wins desc");
     totalWins = cursor.fetchall()
     db.close()
     return totalWins

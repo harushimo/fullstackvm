@@ -17,9 +17,7 @@ create database tournament;
 -- Creating Tables
 create table Players (
   players_id serial PRIMARY KEY,
-  name text,
-  win int default 0,
-  matches int default 0
+  name text
 );
 
 create table Matches (
@@ -28,14 +26,12 @@ create table Matches (
   loser serial references Players(players_id)
 );
 
-create view playerStandings(
-  select *
-  from Players
-  left join Matches
-  where Players.players_id == Matches.winner
-  totalMatchedplayed = count(matches)
-  totalWins = count(win)
-);
+-- Creating views
+create view player_Standings as
+  select players_id, name,
+  (select count(*) from matches where Players.players_id == Matches.winner) as wins,
+  from Players,
+  order by wins desc;
 
 
 
