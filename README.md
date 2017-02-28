@@ -24,3 +24,9 @@ In order to access PostgreSQL, you must type psql in the vagrant vm
 
 1. Create the database in PostgreSQL: ```create database tournament;```
 2. After creating the database, import the sql tables and views by ```\i tournament.sql```
+
+##Running the tournament test file
+
+To run the tournament test file, you must use this command:
+
+```python tournament_test.py```
